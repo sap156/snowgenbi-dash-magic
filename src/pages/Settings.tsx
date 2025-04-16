@@ -1,5 +1,5 @@
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { PageLayout } from '@/components/layout/PageLayout';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -8,6 +8,9 @@ import { Label } from '@/components/ui/label';
 import { Switch } from '@/components/ui/switch';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Checkbox } from '@/components/ui/checkbox';
+import { ChartThemeSelector } from '@/components/settings/ChartThemeSelector';
+import { useTheme } from '@/contexts/ThemeContext';
+import { toast } from '@/components/ui/use-toast';
 import {
   Select,
   SelectContent,
@@ -31,14 +34,30 @@ import {
 } from 'lucide-react';
 
 const Settings = () => {
-  const [darkMode, setDarkMode] = useState(false);
+  const { 
+    darkMode, 
+    setDarkMode, 
+    dashboardDensity, 
+    setDashboardDensity,
+    defaultVisualization,
+    setDefaultVisualization,
+    saveThemeSettings
+  } = useTheme();
+  
   const [emailNotifications, setEmailNotifications] = useState(true);
   const [appNotifications, setAppNotifications] = useState(true);
   const [apiTimeout, setApiTimeout] = useState(30);
   const [maxRows, setMaxRows] = useState(1000);
   const [dataRefreshInterval, setDataRefreshInterval] = useState('30');
-  const [defaultVisualization, setDefaultVisualization] = useState('auto');
   const [language, setLanguage] = useState('en');
+
+  const handleSaveAppearance = () => {
+    saveThemeSettings();
+    toast({
+      title: "Appearance settings saved",
+      description: "Your changes have been applied to the application.",
+    });
+  };
 
   return (
     <PageLayout title="Settings">
@@ -154,39 +173,29 @@ const Settings = () => {
 
                 <div className="space-y-3">
                   <Label>Chart Color Theme</Label>
-                  <div className="grid grid-cols-4 gap-2">
-                    <div className="rounded-md border-2 border-primary p-2 text-center">
-                      <div className="mx-auto mb-2 h-8 rounded-md bg-gradient-to-r from-blue-500 to-purple-500"></div>
-                      <span className="text-xs">Snow Theme</span>
-                    </div>
-                    <div className="rounded-md border p-2 text-center">
-                      <div className="mx-auto mb-2 h-8 rounded-md bg-gradient-to-r from-emerald-500 to-teal-500"></div>
-                      <span className="text-xs">Nature</span>
-                    </div>
-                    <div className="rounded-md border p-2 text-center">
-                      <div className="mx-auto mb-2 h-8 rounded-md bg-gradient-to-r from-orange-500 to-red-500"></div>
-                      <span className="text-xs">Sunset</span>
-                    </div>
-                    <div className="rounded-md border p-2 text-center">
-                      <div className="mx-auto mb-2 h-8 rounded-md bg-gradient-to-r from-gray-500 to-gray-700"></div>
-                      <span className="text-xs">Monochrome</span>
-                    </div>
-                  </div>
+                  <ChartThemeSelector />
                 </div>
 
                 <div className="space-y-3">
                   <div className="flex items-center justify-between">
                     <Label>Dashboard Density</Label>
-                    <span className="text-sm text-muted-foreground">Compact</span>
+                    <span className="text-sm text-muted-foreground">
+                      {dashboardDensity === 0 ? 'Spacious' : dashboardDensity === 1 ? 'Regular' : 'Compact'}
+                    </span>
                   </div>
-                  <Slider defaultValue={[1]} max={2} step={1} />
+                  <Slider 
+                    defaultValue={[dashboardDensity]} 
+                    max={2} 
+                    step={1} 
+                    onValueChange={([value]) => setDashboardDensity(value as any)}
+                  />
                 </div>
 
                 <div className="space-y-2">
                   <Label htmlFor="default-vis">Default Visualization Type</Label>
                   <Select
                     value={defaultVisualization}
-                    onValueChange={setDefaultVisualization}
+                    onValueChange={setDefaultVisualization as any}
                   >
                     <SelectTrigger>
                       <SelectValue placeholder="Select default visualization" />
@@ -201,7 +210,7 @@ const Settings = () => {
                   </Select>
                 </div>
 
-                <Button>
+                <Button onClick={handleSaveAppearance}>
                   <Save className="mr-2 h-4 w-4" />
                   Save Changes
                 </Button>

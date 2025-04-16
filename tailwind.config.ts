@@ -1,3 +1,4 @@
+
 import type { Config } from "tailwindcss";
 
 export default {
@@ -75,6 +76,43 @@ export default {
 					900: '#0c4a6e',
 					950: '#082f49',
 				},
+                // Chart theme colors
+                // Snow Theme (Blue to Purple)
+                'theme-snow-1': '#4A6FFF',
+                'theme-snow-2': '#5E7CFF',
+                'theme-snow-3': '#7289FF',
+                'theme-snow-4': '#8696FF',
+                'theme-snow-5': '#9AA3FF',
+                'theme-snow-6': '#AEB0FF',
+                'theme-snow-7': '#C2BDFF',
+                'theme-snow-8': '#D6CAFF',
+                // Nature Theme (Green to Teal)
+                'theme-nature-1': '#34D399',
+                'theme-nature-2': '#3EC9A0',
+                'theme-nature-3': '#48BFA7',
+                'theme-nature-4': '#52B5AE',
+                'theme-nature-5': '#5CABB5',
+                'theme-nature-6': '#66A1BC',
+                'theme-nature-7': '#7097C3',
+                'theme-nature-8': '#7A8DCA',
+                // Sunset Theme (Orange to Red)
+                'theme-sunset-1': '#F97316',
+                'theme-sunset-2': '#F76B2D',
+                'theme-sunset-3': '#F56444',
+                'theme-sunset-4': '#F35C5B',
+                'theme-sunset-5': '#F15472',
+                'theme-sunset-6': '#EF4C89',
+                'theme-sunset-7': '#ED44A0',
+                'theme-sunset-8': '#EB3CB7',
+                // Monochrome Theme (Grays)
+                'theme-mono-1': '#94A3B8',
+                'theme-mono-2': '#86909C',
+                'theme-mono-3': '#787E80',
+                'theme-mono-4': '#6A6C64',
+                'theme-mono-5': '#5C5A48',
+                'theme-mono-6': '#4E482C',
+                'theme-mono-7': '#403610',
+                'theme-mono-8': '#322400',
 			},
 			borderRadius: {
 				lg: 'var(--radius)',
