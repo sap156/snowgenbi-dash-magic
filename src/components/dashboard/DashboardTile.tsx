@@ -34,12 +34,12 @@ export function DashboardTile({
   className
 }: DashboardTileProps) {
   return (
-    <Card className={`overflow-hidden shadow-md ${className}`}>
-      <CardHeader className="bg-card px-4 py-3">
+    <Card className={`dashboard-tile overflow-hidden ${className}`}>
+      <CardHeader className="bg-card px-4 py-3 border-b">
         <div className="flex items-center justify-between">
           <div>
-            <CardTitle className="text-lg">{title}</CardTitle>
-            {description && <CardDescription>{description}</CardDescription>}
+            <CardTitle className="text-lg font-medium">{title}</CardTitle>
+            {description && <CardDescription className="text-sm">{description}</CardDescription>}
           </div>
           <div className="flex items-center gap-1">
             {onRefresh && (

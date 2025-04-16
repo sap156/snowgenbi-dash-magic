@@ -7,7 +7,17 @@ import { TableTile } from '@/components/dashboard/TableTile';
 import { QueryAnalysis } from '@/components/dashboard/QueryAnalysis';
 import { Button } from '@/components/ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { LayoutDashboard, Share2, Download, PlusCircle } from 'lucide-react';
+import { 
+  LayoutDashboard, 
+  Share2, 
+  Download, 
+  PlusCircle, 
+  Users, 
+  UserPlus, 
+  Percent, 
+  DollarSign 
+} from 'lucide-react';
+import { StatTile } from '@/components/dashboard/StatTile';
 
 // Sample data for demonstration
 const sampleData = {
@@ -81,23 +91,23 @@ const Dashboards = () => {
   return (
     <PageLayout title="Dashboards">
       <div className="space-y-8">
-        <div className="flex items-center justify-between">
+        <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
           <div>
-            <h1 className="text-2xl font-bold">Ask Questions & Build Dashboards</h1>
+            <h1 className="text-2xl font-semibold text-foreground">Analytics Dashboard</h1>
             <p className="text-muted-foreground">
               Use natural language to analyze your data and create visualizations
             </p>
           </div>
-          <div className="flex gap-2">
-            <Button variant="outline" size="sm">
+          <div className="flex flex-wrap gap-2">
+            <Button variant="outline" size="sm" className="h-9">
               <Download className="mr-2 h-4 w-4" />
               Export
             </Button>
-            <Button variant="outline" size="sm">
+            <Button variant="outline" size="sm" className="h-9">
               <Share2 className="mr-2 h-4 w-4" />
               Share
             </Button>
-            <Button size="sm">
+            <Button size="sm" className="h-9 bg-blue-600 hover:bg-blue-700">
               <PlusCircle className="mr-2 h-4 w-4" />
               New Dashboard
             </Button>
@@ -108,6 +118,33 @@ const Dashboards = () => {
 
         {showQueryResults && (
           <div className="space-y-6">
+            <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+              <StatTile 
+                title="Total Users" 
+                value="12,345" 
+                description="The total number of registered users."
+                icon={<Users className="h-5 w-5" />} 
+              />
+              <StatTile 
+                title="New Signups" 
+                value="1,234" 
+                description="The number of new users that signed up this month."
+                icon={<UserPlus className="h-5 w-5" />} 
+              />
+              <StatTile 
+                title="Conversion Rate" 
+                value="12%" 
+                description="The percentage of visitors that become customers."
+                icon={<Percent className="h-5 w-5" />} 
+              />
+              <StatTile 
+                title="Revenue" 
+                value="$123,456" 
+                description="The total revenue generated this month."
+                icon={<DollarSign className="h-5 w-5" />} 
+              />
+            </div>
+
             <QueryAnalysis
               query={currentQuery}
               sql={`SELECT 
@@ -130,37 +167,40 @@ LIMIT 5;`}
             <div>
               <h2 className="mb-4 text-xl font-semibold">Analysis Results</h2>
               <Tabs defaultValue="charts">
-                <TabsList>
-                  <TabsTrigger value="charts" className="flex items-center gap-1">
+                <TabsList className="mb-4 bg-card border">
+                  <TabsTrigger value="charts" className="flex items-center gap-1 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground">
                     <LayoutDashboard className="h-4 w-4" />
                     <span>Charts</span>
                   </TabsTrigger>
-                  <TabsTrigger value="table">Table</TabsTrigger>
+                  <TabsTrigger value="table" className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground">Table</TabsTrigger>
                 </TabsList>
-                <TabsContent value="charts" className="mt-4">
+                <TabsContent value="charts" className="mt-0">
                   <div className="grid gap-6 md:grid-cols-2">
                     <ChartTile 
-                      title="Top Products by Sales (Q1 2023)"
-                      type="bar"
-                      data={sampleData.productSales}
-                      dataKey="value"
+                      title="Sales Trends"
+                      description="A line chart showing sales trends over time."
+                      type="line"
+                      data={sampleData.monthlySales}
+                      dataKey="sales"
                     />
                     <ChartTile 
-                      title="Sales by Region (Q1 2023)"
-                      type="pie"
+                      title="User Acquisition"
+                      description="A bar chart showing user acquisition by channel."
+                      type="bar"
                       data={sampleData.regionSales}
                       dataKey="value"
                     />
                     <ChartTile 
-                      title="Monthly Sales Trend (2023)"
-                      type="line"
-                      data={sampleData.monthlySales}
-                      dataKey="sales"
+                      title="Top Products"
+                      description="A pie chart showing the top selling products."
+                      type="pie"
+                      data={sampleData.productSales}
+                      dataKey="value"
                       className="md:col-span-2"
                     />
                   </div>
                 </TabsContent>
-                <TabsContent value="table" className="mt-4">
+                <TabsContent value="table" className="mt-0">
                   <TableTile 
                     title="Customer Purchase Data"
                     data={sampleData.customers}
@@ -179,7 +219,7 @@ LIMIT 5;`}
             <p className="mx-auto mb-4 max-w-md text-muted-foreground">
               Ask a question about your data above to generate visualizations and insights.
             </p>
-            <Button>
+            <Button className="bg-blue-600 hover:bg-blue-700">
               <PlusCircle className="mr-2 h-4 w-4" />
               Create Dashboard Manually
             </Button>
