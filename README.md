@@ -1,4 +1,19 @@
-# Welcome to your Lovable project
+# SnowGenBI: AI-Powered Business Intelligence for Snowflake
+
+**Ask your data. Build dashboards instantly.**
+
+## About SnowGenBI
+
+SnowGenBI is a powerful GenAI-powered Business Intelligence dashboard tool that connects to Snowflake using the MCP (Model Context Protocol). It enables users to ask natural language questions about their data and instantly generate visualizations, insights, and dashboards.
+
+### Key Features
+
+- **Natural Language Interface**: Ask business questions in plain English, without SQL knowledge
+- **Auto-Generated SQL**: AI translates your questions into optimized SQL queries
+- **Smart Visualizations**: Automatically generates the most appropriate charts and tables
+- **AI-Powered Insights**: Get instant analysis and explanations of your data
+- **Snowflake MCP Integration**: Secure connection to your Snowflake data warehouse
+- **Dashboard Management**: Create, save, and share beautiful dashboards
 
 ## Project info
 

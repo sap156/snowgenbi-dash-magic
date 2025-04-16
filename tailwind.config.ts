@@ -61,7 +61,33 @@ export default {
 					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
-				}
+				},
+                snowbi: {
+                    50: '#f0f5ff',
+                    100: '#e0eaff',
+                    200: '#c7d7fe',
+                    300: '#a4bcfc',
+                    400: '#8098f9',
+                    500: '#6374f4',
+                    600: '#4a51e8',
+                    700: '#3e41cd',
+                    800: '#3439a6',
+                    900: '#2d3282',
+                    950: '#1e1f4b',
+                },
+                insight: {
+                    50: '#faf5ff',
+                    100: '#f3e8ff',
+                    200: '#e9d5ff',
+                    300: '#d8b4fe',
+                    400: '#c084fc',
+                    500: '#a855f7',
+                    600: '#9333ea',
+                    700: '#7e22ce',
+                    800: '#6b21a8',
+                    900: '#581c87',
+                    950: '#3b0764',
+                }
 			},
 			borderRadius: {
 				lg: 'var(--radius)',
